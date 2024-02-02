@@ -1,0 +1,160 @@
+<div class="xl:container mx-auto flex flex-col gap-1">
+  <section class="hero w-100 flex justify-center items-center h-[30vh] rounded">
+
+    <div>
+      <h1>
+        Notification Handler <span class="text-4xl"> ⏱️ </span>
+      </h1>
+    </div>
+
+  </section>
+  <section class="w-100 min-h-[40vh] form-holder p-10 rounded">
+    <form class="p-6 rounded mx-auto">
+      <div class="space-y-12">
+        <div class="border-b border-gray-900/10 pb-12">
+          <h2 class="text-base font-semibold leading-7 text-gray-900">New Schedule</h2>
+          <p class="mt-1 text-sm leading-6 text-gray-600">This information is required in order to create a new schedule
+          </p>
+
+          <div class="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-8">
+            <!-- Name -->
+            <div class="sm:col-span-4">
+              <label for="username" class="block text-sm font-medium leading-6 text-gray-900">Name</label>
+              <div class="mt-2">
+                <div
+                  class="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600 sm:max-w-md">
+                  <input type="text" name="schedule-name" id="schedule-name" autocomplete="schedule-name"
+                    [(ngModel)]="name"
+                    class="block flex-1 border-0 bg-transparent py-1.5 pl-1 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
+                    placeholder="my first schedule">
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="border-b border-gray-900/10 pb-12">
+          <h2 class="text-base font-semibold leading-7 text-gray-900">Schedule Information</h2>
+          <p class="mt-1 text-sm leading-6 text-gray-600">Schedule Expression Form</p>
+          <div class="mt-1 text-sm leading-6 " *ngIf="displayEndDate"><label for="end-box"
+              class="flex items-center gap-2"> <span> Would you like to have an End date for this event ?</span> <input
+                [(ngModel)]="endDateBox" name="end-box" type="checkbox"></label></div>
+          <div class="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
+            <div class="sm:col-span-3 flex flex-col justify-between gap-1">
+              <label for="start-date" class="block text-sm font-medium leading-6 text-gray-900">Start Date</label>
+              <div class="mt-2">
+                <input type="date" name="start-date" id="start-date" [(ngModel)]="startDate" autocomplete="start-date"
+                  class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+              </div>
+              <label for="start-hour" class="block text-sm font-medium leading-6 text-gray-900">Hour</label>
+              <div class="mt-2">
+                <input type="time" name="start-hour" id="start-hour" [(ngModel)]="startHour" autocomplete="start-date"
+                  class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+              </div>
+            </div>
+
+            <div class="sm:col-span-3 flex flex-col justify-between gap-1">
+              <ng-container *ngIf="displayEndDate && endDateBox">
+                <label for="end-date" class="block text-sm font-medium leading-6 text-gray-900">End Date</label>
+                <div class="mt-2">
+                  <input type="date" name="end-date" id="end-date" autocomplete="end-date" [(ngModel)]="endDate"
+                    class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+
+                </div>
+                <label for="end-hour" class="block text-sm font-medium leading-6 text-gray-900">Hour</label>
+                <div class="mt-2">
+                  <input type="time" name="end-hour" id="end-hour" [(ngModel)]="endHour" autocomplete="start-date"
+                    class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+                </div>
+              </ng-container>
+            </div>
+            <div class="sm:col-span-3">
+              <label for="country" class="block text-sm font-medium leading-6 text-gray-900">Type</label>
+              <div class="mt-2">
+                <select id="type" name="type" [(ngModel)]="type" autocomplete="type-name"
+                  class="text-center block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6">
+                  <option value="daily">Daily</option>
+                  <option value="monthly">Monthly</option>
+                  <option value="one_time">One time</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="sm:col-span-3">
+              <label for="type" class="block text-sm font-medium leading-6 text-gray-900">Action</label>
+              <div class="mt-2">
+                <select id="action" name="action" autocomplete="action-name" [(ngModel)]="action"
+                  class="text-center block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6">
+                  <option value="1" class="text-center">Send Email</option>
+                  <option value="2">Mass Email</option>
+                  <option value="3">Send SMS</option>
+                </select>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <div class="col-span-full">
+          <label for="about" class="block text-sm font-medium leading-6 text-gray-900">Payload</label>
+          <p class="mt-3 text-sm leading-6 text-gray-600">This will be passed to the schedule as a body</p>
+          <div class="mt-2">
+            <textarea (change)="onPayloadChange($event)" [(ngModel)]="payload" id="about" name="about" rows="3"
+              class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"></textarea>
+          </div>
+          <span *ngIf="invalidPayload" class="text-sm text-red-600"> Invalid JSON <br> <b>Reason:</b>:
+            {{payloadError}}</span>
+
+        </div>
+
+
+      </div>
+
+      <div class="mt-6 flex items-center justify-end gap-x-6">
+        <button type="button" (click)="createSchedule($event)"
+          class="rounded-m px-3 py-2 text-sm font-semibold text-white shadow-smfocus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Save</button>
+      </div>
+    </form>
+  </section>
+  <section class="notification-section flex flex-col items-center content-center">
+    <h2 class="text-2xl">Schedule List</h2>
+    <div class="flex flex-wrap">
+      <ng-template #schedulesContainer>
+        <div class="relative rounded min-w-[32%] flex flex-col  card" *ngFor="let n of schedules">
+          <button class="bg-transparent text-sm absolute right-2 top-1 text-red-600" (click)="deleteSchedule(n.id)">
+            x
+          </button>
+          <h2 class="text-center">
+            {{n.name}}
+          </h2>
+          <div>
+            <p class="text-sm">
+              <b>Type:</b> {{n.expression.type}}
+            </p>
+          </div>
+          <div>
+
+            <p>
+              <b> Action: </b>{{n.action.name}}
+            </p>
+          </div>
+          <div>
+            <p>
+              <b> Payload: </b>{{n.payload | json}}
+            </p>
+          </div>
+          <footer class="text-xs">
+            <p>
+              <b> Start Date: </b>{{n.expression.start_date}}
+            </p>
+          </footer>
+        </div>
+      </ng-template>
+      <div *ngIf="!schedules?.length; else schedulesContainer" class="text-2xl flex justify-center items-center p-4">
+
+        <p>No schedules found 404. Go create one</p>
+
+      </div>
+    </div>
+  </section>
+</div>

@@ -1,0 +1,30 @@
+# Use root/example as user/password credentials
+version: '3.1'
+    
+services:
+  mongo:
+    image: mongo
+    restart: always
+    ports:
+      - 27017:27017
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: example
+
+  notification-scheduler:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - 8080:8080
+    env_file:
+      - .env
+    environment:
+      - MONGO_URI=mongodb://root:example@mongo:27017/
+      - SINGLE_EMAIL_FUNCTION={SAMPLE_LAMBDA_ARN}
+      - SINGLE_EMAIL_ROLE={SAMPLE_LAMBDA_ROLE_ARN}
+      - AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY_ID}
+      - AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY}
+      - AWS_REGION=${AWS_REGION}
+    depends_on:
+      - mongo

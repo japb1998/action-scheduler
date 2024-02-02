@@ -1,0 +1,53 @@
+/* You can add global styles to this file, and also import other style files */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+    --main-orange: #E53D00;
+    --main-yellow: #FFE900;
+    --main-blue: #21A0A0;
+    --main-green: #046865;
+    --main-white: #FCFFF7;
+}
+*{
+    font-family: 'IBM Plex Mono', monospace;
+    scroll-behavior: smooth;
+}
+.hero {
+    background-color: var(--main-orange);
+    color: var(--main-white);
+}
+
+html, body {
+    background-color: #FFFDEB;
+}
+
+.notification-section {
+    background-color: var(--main-white);
+    min-height: 50vh;
+}
+.card {
+    background-color: #FF7847;
+    border-radius: 10px;
+    padding: 10px;
+    margin: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+.card:hover {
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+.card-title {
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+.form-holder {
+    background-color: #21A0A0;
+}
+form {
+    background-color: var(--main-white);
+}
+form button {
+    background-color: #046865 !important;
+}
+
